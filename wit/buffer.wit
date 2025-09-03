@@ -1,0 +1,10 @@
+package jcbhmr:node-wasm@24.7.0;
+
+interface buffer {
+    resource buffer {
+        alloc: static func(size: u32, fill: option<string-or-buffer-or-uint8-array-or-u32>, encoding: option<string>) -> buffer;
+        alloc-unsafe: static func(size: u32) -> buffer;
+        alloc-unsafe-slow: static func(size: u32) -> buffer;
+        byte-length: static func(v: string-or-buffer-or-typed-array-or-data-view-or-array-buffer-or-, encoding: option<string>) -> u32;
+    }
+}

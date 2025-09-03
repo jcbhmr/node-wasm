@@ -1,0 +1,41 @@
+package jcbhmr:node-wasm@24.7.0;
+
+interface assert {
+    use jcbhmr:ecmascript-wasm/types@16.0.0.{any, reg-exp, function};
+    resource assertion-error {
+        get-actual: func() -> any;
+        get-expected: func() -> any;
+        get-generated-message: func() -> bool;
+        get-code: func() -> string;
+        get-operator: func() -> string;
+        constructor(options: assertion-error-options);
+    }
+    record assertion-error-options {
+        message: option<string>,
+        actual: option<any>,
+        expected: option<any>,
+        operator: option<string>,
+        start-stack-fn: option<function>,
+    }
+    resource assert {
+        constructor(options: assert-options);
+        deep-equal: func(actual: any, expected: any, message: option<any>) -> result<_, any>;
+        deep-strict-equal: func(actual: any, expected: any, message: option<any>) -> result<_, any>;
+        // ...
+    }
+    record assert-options {
+        diff: string,
+        strict: bool,
+    }
+    default: func(value: any, message: option<any>) -> result<_, any>;
+    deep-equal: func(actual: any, expected: any, message: option<any>) -> result<_, any>;
+    deep-strict-equal: func(actual: any, expected: any, message: option<any>) -> result<_, any>;
+    does-not-match: func(%string: string, regexp: reg-exp, message: option<any>) -> result<_, any>;
+    does-not-reject: func(async-fn: function-or-promise, error: reg-exp-or-function, message: string) -> result<_, any>;
+    does-not-throw: func(fn: function, error: reg-exp-or-function, message: string) -> result<_, any>;
+    // ...
+}
+
+interface assert-strict {
+
+}
